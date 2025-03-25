@@ -32,16 +32,16 @@ class NovaSettings extends Tool
             ->filter(function ($resource) use ($request) {
                 $policy = str($resource['title'])->camel()->append('::view')->toString();
                 $user = $request->user();
-                if (method_exists($user, 'can') && method_exists($user, 'roles')) {
-                    $user->loadMissing([
-                        'roles',
-                        'roles.permissions',
-                        'permissions',
-                    ]);
-                    if ($user->roles->count()) {
-                        return $request->user()->can($policy);
-                    }
-                }
+                // if (method_exists($user, 'can') && method_exists($user, 'roles')) {
+                //     $user->loadMissing([
+                //         'roles',
+                //         'roles.permissions',
+                //         'permissions',
+                //     ]);
+                //     if ($user->roles->count()) {
+                //         return $request->user()->can($policy);
+                //     }
+                // }
 
                 return true;
             })
