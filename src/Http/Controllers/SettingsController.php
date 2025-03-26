@@ -18,11 +18,6 @@ class SettingsController extends Controller
     public function get(string $group, NovaRequest $request)
     {
         $resources = settingsResources()
-            ->where(
-                fn ($resource) => str($resource['group'])->lower()->slug()->__toString() === str($group)->lower()->slug()->__toString()
-            )->sort(
-                fn ($a, $b) => $a['order'] <=> $b['order']
-            )->map(function ($resource) {
             // ->filter(function ($resource) use ($request) {
             //     $policy = str($resource['title'])->camel()->append('::view')->toString();
             //     $user = $request->user();
@@ -43,6 +38,13 @@ class SettingsController extends Controller
             //
             //     return true;
             // })
+            // ->where(
+            //     fn ($resource) => str($resource['group'])->lower()->slug()->__toString() === str($group)->lower()->slug()->__toString()
+            // )->sort(
+            //     fn ($a, $b) => $a['order'] <=> $b['order']
+            // )
+            ->map(function ($resource) {
+                $resource['name'] = '';
                 unset($resource['settings']);
 
                 return $resource;
@@ -118,3 +120,4 @@ class SettingsController extends Controller
         return back();
     }
 }
+
