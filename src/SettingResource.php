@@ -56,7 +56,7 @@ abstract class SettingResource
         $fields = LazyCollection::make(
             FieldCollection::make(static::fields())->authorized(request())->toArray()
         )->map(function ($field) {
-            $field->panel = sprintf('%s_%s', static::group(), str()->random(5));
+            // $field->panel = sprintf('%s_%s', static::group(), str()->random(5));
 
             return $field;
         });
@@ -84,3 +84,4 @@ abstract class SettingResource
         ];
     }
 }
+
